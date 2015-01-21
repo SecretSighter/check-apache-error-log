@@ -12,7 +12,7 @@ if($serverhash != $localhash){
 	$mail->setFrom(php_uname('n'));
 	$mail->addTo('douglas@americanhcl.com');
 	copy('/var/log/apache2/error.log', dirname(__FILE__).'/error.log');
-	exec('tail -100 ' . dirname(__FILE__).'/error.log > error.diff');
+	exec('tail -100 ' . dirname(__FILE__).'/error.log > '.dirname(__FILE__).'/error.diff');
 	$mail->createAttachment(file_get_contents(dirname(__FILE__).'/error.diff'), 'text/plain', Zend_Mime::DISPOSITION_INLINE, Zend_Mime::ENCODING_BASE64, 'Error.log');
 	$mail->setBodyText('error.log');
 	$mail->send(new \Zend_Mail_Transport_Smtp('localhost'));	
