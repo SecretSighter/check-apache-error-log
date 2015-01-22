@@ -9,6 +9,7 @@ $localhash = hash_file('sha256', dirname(__FILE__).'/error.log');
 $rules = array(
 	'grep -v 172.31.17.131',
 	'grep -v 172.31.25.188',
+	'grep -v notice',
 	'grep -v Hostname'
 );
 
@@ -37,15 +38,15 @@ if($serverhash != $localhash){
 	//	$mail->createAttachment(file_get_contents(dirname(__FILE__).'/error.diff'), 'text/plain', Zend_Mime::DISPOSITION_INLINE, Zend_Mime::ENCODING_BASE64, 'Error.log');
 
 	$lines=array();
-$fp = fopen(dirname(__FILE__).'/error.diff', "r");
-while(!feof($fp))
-{
-   $line = fgets($fp, 4096);
-   array_push($lines, $line);
-   if (count($lines)>5)
-       array_shift($lines);
-}
-fclose($fp);
+	$fp = fopen(dirname(__FILE__).'/error.diff', "r");
+	while(!feof($fp))
+	{
+	   $line = fgets($fp, 4096);
+	   array_push($lines, $line);
+	   if (count($lines)>5)
+	       array_shift($lines);
+	}
+	fclose($fp);
 
 	$mail->setBodyText(implode("\n", $lines));
 		$mail->send(new \Zend_Mail_Transport_Smtp('localhost'));
