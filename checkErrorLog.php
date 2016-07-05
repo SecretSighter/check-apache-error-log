@@ -10,7 +10,7 @@ $rules = array(
 	'grep -v Hostname'
 );
 
-$configEmail = 'douglas@americanhcl.com';
+$configEmail = '';
 $configError = '/var/log/apache2/error.log';
 $configLocalError = dirname(__FILE__).'/error.log';
 $configErrorDiff = dirname(__FILE__).'/error.diff';
